@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashcardsApp", "FlashcardsApp\FlashcardsApp.csproj", "{238534AF-2340-4BA4-8950-608DCF4EC6EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlashcardsApp", "FlashcardsApp\FlashcardsApp.csproj", "{238534AF-2340-4BA4-8950-608DCF4EC6EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashcardsApp.Application", "FlashcardsApp.Application\FlashcardsApp.Application.csproj", "{ABCA079C-E51B-4095-AE92-4B4D86635A83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlashcardsApp.Application", "FlashcardsApp.Application\FlashcardsApp.Application.csproj", "{ABCA079C-E51B-4095-AE92-4B4D86635A83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashcardsApp.Domain", "FlashcardsApp.Domain\FlashcardsApp.Domain.csproj", "{BCA47635-25F8-4C79-B644-14AEFE410781}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlashcardsApp.Domain", "FlashcardsApp.Domain\FlashcardsApp.Domain.csproj", "{BCA47635-25F8-4C79-B644-14AEFE410781}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashcardsApp.Infrastructure", "FlashcardsApp.Infrastructure\FlashcardsApp.Infrastructure.csproj", "{5EA804EF-57E3-434C-BA3B-16BFB2D01D48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlashcardsApp.Infrastructure", "FlashcardsApp.Infrastructure\FlashcardsApp.Infrastructure.csproj", "{5EA804EF-57E3-434C-BA3B-16BFB2D01D48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
