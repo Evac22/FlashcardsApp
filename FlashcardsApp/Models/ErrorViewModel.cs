@@ -1,4 +1,4 @@
-namespace FlashcardsApp.Models
+﻿namespace FlashcardsApp.Models
 {
     public class ErrorViewModel
     {

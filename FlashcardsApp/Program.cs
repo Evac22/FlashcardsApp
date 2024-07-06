@@ -1,6 +1,7 @@
 using FlashcardsApp.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Design;
 
 
 var builder = WebApplication.CreateBuilder(args);
