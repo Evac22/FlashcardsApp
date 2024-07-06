@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -9,6 +9,18 @@
   <ItemGroup>
     <Folder Include="Pages\" />
     <Folder Include="Components\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.31" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.31" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.31" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FlashcardsApp.Application\FlashcardsApp.Application.csproj" />
+    <ProjectReference Include="..\FlashcardsApp.Domain\FlashcardsApp.Domain.csproj" />
+    <ProjectReference Include="..\FlashcardsApp.Infrastructure\FlashcardsApp.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
