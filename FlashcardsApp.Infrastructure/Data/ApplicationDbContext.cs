@@ -3,64 +3,31 @@ using FlashcardsApp.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
-namespace FlashcardsApp.Infrastructure.Data;
-
-public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+namespace FlashcardsApp.Infrastructure.Data
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-    public DbSet<User> Users { get; set; }
-    public DbSet<Card> Cards { get; set; }
-    public DbSet<Deck> Decks { get; set; }
-
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public DbSet<Card> Cards { get; set; }
+        public DbSet<Deck> Decks { get; set; }
 
-        base.OnModelCreating(modelBuilder);
-
-
-        // Configure the User entity
-
-        modelBuilder.Entity<User>(entity =>
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
 
-            entity.HasKey(e => e.Id);
+            modelBuilder.Entity<Card>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne(e => e.Deck)
+                      .WithMany(d => d.Cards)
+                      .HasForeignKey(e => e.DeckId);
+            });
 
-            entity.Property(e => e.Email).IsRequired();
-
-        });
-
-
-        // Configure the Card entity
-
-        modelBuilder.Entity<Card>(entity =>
-
-        {
-
-            entity.HasKey(e => e.Id);
-
-            entity.HasOne(e => e.Deck)
-
-                  .WithMany(d => d.Cards)
-
-                  .HasForeignKey(e => e.DeckId);
-
-        });
-
-
-        // Configure the Deck entity
-
-        modelBuilder.Entity<Deck>(entity =>
-
-        {
-
-            entity.HasKey(e => e.Id);
-
-            entity.Property(e => e.Name).IsRequired();
-
-        });
-
+            modelBuilder.Entity<Deck>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Name).IsRequired();
+            });
+        }
     }
 }

@@ -8,5 +8,6 @@ public class Card
     public string Question { get; set; }
     public string Answer { get; set; }
     public int DeckId { get; set; }
-    public Deck Deck { get; set; }
+    public Deck Deck { get; set; }   
+    public byte[] Image { get; set; }
 }
