@@ -6,3 +6,17 @@
     <h1 class="display-4">Welcome</h1>
     <p>Welcome to your application!</p>
 </div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="text-center">
+        <a asp-controller="Cards" asp-action="Create" class="btn btn-primary">Добавить карточку</a>
+    </div>
+}
+
+<div>
+    <h2>Список карточек</h2>
+    <table class="table">
+        <!-- Здесь должен быть код для отображения списка карточек -->
+    </table>
+</div>
