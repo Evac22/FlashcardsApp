@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
+[Authorize]
 public class CardsController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -62,10 +63,10 @@ public class CardsController : Controller
 
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
-    {
+            {
         var card = await _context.Cards.FindAsync(id);
         if(card == null)
-        {
+                {
             return NotFound();
         }
 
@@ -78,7 +79,7 @@ public class CardsController : Controller
         };
 
         return View(model);
-    }
+                }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -87,7 +88,7 @@ public class CardsController : Controller
         if (id != model.Id)
         {
             return BadRequest();
-        }
+            }
 
         var validationResult = await _validator.ValidateAsync(model);
 
@@ -107,8 +108,9 @@ public class CardsController : Controller
             try
             {
                 _context.Update(card);
-                await _context.SaveChangesAsync();
-            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
             catch (DbUpdateConcurrencyException)
             {
                 if (!_context.Cards.Any(e => e.Id == id))
