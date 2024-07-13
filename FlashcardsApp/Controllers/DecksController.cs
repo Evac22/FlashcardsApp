@@ -1,5 +1,6 @@
 ﻿using FlashcardsApp.Domain.Entities;
 using FlashcardsApp.Infrastructure.Data;
+using FlashcardsApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -92,7 +93,7 @@ namespace FlashcardsApp.Controllers
                 try
                 {
                     _context.Update(deck);
-                    await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {

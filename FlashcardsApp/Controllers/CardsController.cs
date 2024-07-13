@@ -29,6 +29,7 @@ public class CardsController : Controller
         return View(model);
     }
 
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CreateCardViewModel model)
