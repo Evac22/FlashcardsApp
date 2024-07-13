@@ -1,4 +1,6 @@
-﻿namespace FlashcardsApp.Models
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace FlashcardsApp.Models
 {
     public class CreateCardViewModel
     {
@@ -6,5 +8,6 @@
         public string Answer { get; set; }
         public IFormFile Image { get; set; }
         public int DeckId { get; set; }
+        public SelectList Decks { get; set; }
     }
 }

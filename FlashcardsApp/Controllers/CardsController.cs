@@ -3,6 +3,7 @@ using FlashcardsApp.Infrastructure.Data;
 using FlashcardsApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 [Authorize]
 public class CardsController : Controller
@@ -17,8 +18,14 @@ public class CardsController : Controller
     [HttpGet]
     public IActionResult Create()
     {
-        return View();
+        var decks = _context.Decks.ToList();
+        var model = new CreateCardViewModel
+        {
+            Decks = new SelectList(decks, "Id", "Name")
+        };
+        return View(model);
     }
+
 
     [HttpPost]
     public async Task<IActionResult> Create(CreateCardViewModel model)
