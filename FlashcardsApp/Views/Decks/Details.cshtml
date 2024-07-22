@@ -1,0 +1,53 @@
+﻿@model FlashcardsApp.Domain.Entities.Deck
+
+@{
+    ViewData["Title"] = "Deck Details";
+}
+
+<h1>Deck Details</h1>
+
+<div>
+    <h4>Deck</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <h4>Cards</h4>
+    <p>
+        <a asp-action="Create" asp-controller="Cards" asp-route-deckId="@Model.Id">Add New Card</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Answer</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var card in Model.Cards)
+            {
+                <tr>
+                    <td>@card.Question</td>
+                    <td>@card.Answer</td>
+                    <td>
+                        <a asp-action="Edit" asp-controller="Cards" asp-route-id="@card.Id">Edit</a> |
+                        <a asp-action="Delete" asp-controller="Cards" asp-route-id="@card.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

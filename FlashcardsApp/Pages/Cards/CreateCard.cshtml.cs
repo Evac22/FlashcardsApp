@@ -28,11 +28,11 @@ namespace FlashcardsApp.Pages.Cards
 
             byte[] imageData = null;
 
-            if(Card.Image != null)
+            if(Card.ImageFile != null)
             {
                 using (var memmoryStream = new MemoryStream())
                 {
-                    await Card.Image.CopyToAsync(memmoryStream);
+                    await Card.ImageFile.CopyToAsync(memmoryStream);
                     imageData = memmoryStream.ToArray();
                 }
             }
