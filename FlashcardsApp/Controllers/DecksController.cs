@@ -1,6 +1,5 @@
 ﻿using FlashcardsApp.Domain.Entities;
 using FlashcardsApp.Infrastructure.Data;
-using FlashcardsApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;

@@ -3,6 +3,8 @@ using FlashcardsApp.Infrastructure.Data;
 using FlashcardsApp.Models;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using FlashcardsApp.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +31,24 @@ public class CardsController : Controller
         return View(model);
     }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(CreateCardViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        // Вывод ошибок валидации в консоль
+        //        foreach (var state in ModelState)
+        //        {
+        //            foreach (var error in state.Value.Errors)
+        //            {
+        //                Console.WriteLine($"Property: {state.Key}, Error: {error.ErrorMessage}");
+        //            }
+        //        }
+
+        //        model.Decks = new SelectList(_context.Decks, "Id", "Name", model.DeckId);
+        //        return View(model);
+        //    }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
