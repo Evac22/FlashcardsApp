@@ -4,6 +4,7 @@ namespace FlashcardsApp.Models
 {
     public class CreateCardViewModel
     {
+        public int Id { get; set; }
         public string Question { get; set; }
       
         public string Answer { get; set; }
