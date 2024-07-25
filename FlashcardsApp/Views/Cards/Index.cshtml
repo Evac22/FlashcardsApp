@@ -1,0 +1,35 @@
+﻿@model IEnumerable<FlashcardsApp.Domain.Entities.Card>
+
+@{
+    ViewData["Title"] = "Cards List";
+}
+
+<h2>Cards List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Answer</th>
+            <th>Deck</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var card in Model)
+        {
+            <tr>
+                <td>@card.Question</td>
+                <td>@card.Answer</td>
+                <td>@card.Deck.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@card.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@card.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@card.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Create New Card</a>

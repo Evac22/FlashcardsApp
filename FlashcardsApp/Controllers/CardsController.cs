@@ -1,109 +1,70 @@
 ﻿using FlashcardsApp.Domain.Entities;
 using FlashcardsApp.Infrastructure.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using FlashcardsApp.Models;
+using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace FlashcardsApp.Controllers
+public class CardsController : Controller
 {
-    [Authorize]
-    public class CardsController : Controller
+    private readonly ApplicationDbContext _context;
+    private readonly IValidator<CreateCardViewModel> _validator;
+
+    public CardsController(ApplicationDbContext context, IValidator<CreateCardViewModel> validator)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+        _validator = validator;
+    }
 
-        public CardsController(ApplicationDbContext context)
+    [HttpGet]
+    public IActionResult Create()
+    {
+        var model = new CreateCardViewModel
         {
-            _context = context;
-        }
+            Decks = new SelectList(_context.Decks, "Id", "Name")
+        };
 
-        //public IActionResult Create(int deckId)
-        //{
-        //    var model = new CreateCardViewModel
-        //    {
-        //        DeckId = deckId,
-        //        Decks = new SelectList(_context.Decks, "Id", "Name")
-        //    };
-        //    return View(model);
-        //}
+        return View(model);
+    }
 
-        [HttpGet]
-        public IActionResult Create()
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(CreateCardViewModel model)
+    {
+        var validationResult = await _validator.ValidateAsync(model);
+
+        if (validationResult.IsValid)
         {
-            var model = new CreateCardViewModel
+            var card = new Card
             {
-                Decks = new SelectList(_context.Decks, "Id", "Name")
+                Question = model.Question,
+                Answer = model.Answer,
+                DeckId = model.DeckId,
+                Image = model.ImageFile != null ? await ConvertToBytes(model.ImageFile) : null
             };
 
-            return View(model);
+            _context.Add(card);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", "Decks", new { id = model.DeckId });
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create(CreateCardViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        // Вывод ошибок валидации в консоль
-        //        foreach (var state in ModelState)
-        //        {
-        //            foreach (var error in state.Value.Errors)
-        //            {
-        //                Console.WriteLine($"Property: {state.Key}, Error: {error.ErrorMessage}");
-        //            }
-        //        }
 
-        //        model.Decks = new SelectList(_context.Decks, "Id", "Name", model.DeckId);
-        //        return View(model);
-        //    }
-
-        //    var card = new Card
-        //    {
-        //        Question = model.Question,
-        //        Answer = model.Answer,
-        //        DeckId = model.DeckId,
-        //        Image = model.ImageFile != null ? await ConvertToBytes(model.ImageFile) : null
-        //    };
-
-        //    _context.Add(card);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction("Details", "Decks", new { id = model.DeckId });
-        //}
-        public async Task<IActionResult> Create(CreateCardViewModel model)
+        foreach (var error in validationResult.Errors)
         {
-            // Temporary bypass validation for debugging purposes
-            if (true || ModelState.IsValid)
-            {
-                var card = new Card
-                {
-                    Question = model.Question,
-                    Answer = model.Answer,
-                    DeckId = model.DeckId,
-                    Image = model.ImageFile != null ? await ConvertToBytes(model.ImageFile) : null
-                };
-
-                _context.Add(card);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Details", "Decks", new { id = model.DeckId });
-            }
-
-            model.Decks = new SelectList(_context.Decks, "Id", "Name", model.DeckId); // Ensure the Decks property is set if the model state is invalid
-            return View(model);
+            Console.WriteLine($"Property: {error.PropertyName}, Error: {error.ErrorMessage}");
         }
 
-        private async Task<byte[]> ConvertToBytes(IFormFile imageFile)
+        
+        model.Decks = new SelectList(_context.Decks, "Id", "Name", model.DeckId);
+        return View(model);
+    }
+
+    private async Task<byte[]> ConvertToBytes(IFormFile imageFile)
+    {
+        using (var memoryStream = new MemoryStream())
         {
-            if (imageFile == null)
-            {
-                return null;
-            }
-
-            using (var memoryStream = new MemoryStream())
-            {
-                await imageFile.CopyToAsync(memoryStream);
-                return memoryStream.ToArray();
-            }
+            await imageFile.CopyToAsync(memoryStream);
+            return memoryStream.ToArray();
         }
-
     }
 }
