@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashcardsApp.Infrastructur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashcardsApp.Tests", "FlashcardsApp.Tests\FlashcardsApp.Tests.csproj", "{A78BD8A8-CD7C-4397-A01A-723BB07FA25F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashcardsApp.Tests", "FlashcardsApp.Tests\FlashcardsApp.Tests.csproj", "{A78BD8A8-CD7C-4397-A01A-723BB07FA25F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -86,6 +86,79 @@ public class CardsController : Controller
 
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
+    {
+        var card = await _context.Cards.FindAsync(id);
+        if(card == null)
+        {
+            return NotFound();
+        }
+
+        var model = new CreateCardViewModel
+        {
+            Question = card.Question,
+            Answer = card.Answer,
+            DeckId = card.DeckId,
+            Decks = new SelectList(_context.Decks, "Id", "Name", card.DeckId)
+        };
+
+        return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, CreateCardViewModel model)
+    {
+        if (id != model.Id)
+        {
+            return BadRequest();
+        }
+
+        var validationResult = await _validator.ValidateAsync(model);
+
+        if (validationResult.IsValid)
+        {
+            var card = await _context.Cards.FindAsync(id);
+            if (card == null)
+            {
+                return NotFound();
+            }
+
+            card.Question = model.Question;
+            card.Answer = model.Answer;
+            card.DeckId = model.DeckId;
+            card.Image = model.ImageFile != null ? await ConvertToBytes(model.ImageFile) : card.Image;
+
+            try
+            {
+                _context.Update(card);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Cards.Any(e => e.Id == id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToAction("Details", "Decks", new { id = model.DeckId });
+        }
+
+        foreach (var error in validationResult.Errors)
+        {
+            ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+        }
+
+        model.Decks = new SelectList(_context.Decks, "Id", "Name", model.DeckId);
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
             {
         var card = await _context.Cards.FindAsync(id);
         if(card == null)
