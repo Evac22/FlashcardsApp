@@ -7,16 +7,9 @@ namespace FlashcardsApp.Domain.Entities;
 public class Card
 {
     public int Id { get; set; }
-
-    [Required]
     public string Question { get; set; }
-
-    [Required]
     public string Answer { get; set; }
-
-    [Required]
     public int DeckId { get; set; }
-
     public Deck Deck { get; set; }
     public byte[]? Image { get; set; }
 
