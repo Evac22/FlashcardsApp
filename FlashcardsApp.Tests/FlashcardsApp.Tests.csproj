@@ -28,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FlashcardsApp.Application\FlashcardsApp.Application.csproj" />
     <ProjectReference Include="..\FlashcardsApp.Domain\FlashcardsApp.Domain.csproj" />
+    <ProjectReference Include="..\FlashcardsApp.Infrastructure\FlashcardsApp.Infrastructure.csproj" />
     <ProjectReference Include="..\FlashcardsApp\FlashcardsApp.csproj" />
   </ItemGroup>
 

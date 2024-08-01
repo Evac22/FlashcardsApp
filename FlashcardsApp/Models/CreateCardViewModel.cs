@@ -13,7 +13,7 @@ namespace FlashcardsApp.Models
 
         public SelectList Decks { get; set; }
 
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
     }
 
 
