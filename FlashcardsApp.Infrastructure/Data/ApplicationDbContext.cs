@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using FlashcardsApp.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace FlashcardsApp.Infrastructure.Data
 {

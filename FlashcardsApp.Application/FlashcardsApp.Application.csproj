@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FlashcardsApp.Domain\FlashcardsApp.Domain.csproj" />
     <ProjectReference Include="..\FlashcardsApp.Infrastructure\FlashcardsApp.Infrastructure.csproj" />
   </ItemGroup>

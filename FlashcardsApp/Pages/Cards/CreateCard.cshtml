@@ -1,12 +1,12 @@
 ﻿@model FlashcardsApp.Models.CreateCardViewModel
 
 @{
-    ViewData["Title"] = "Добавить карточку";
+    ViewData["Title"] = "Create Card";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2>Create Card</h2>
 
-<form asp-action="Create" enctype="multipart/form-data" method="post">
+<form asp-action="Create" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="Question" class="control-label"></label>
         <input asp-for="Question" class="form-control" />
@@ -18,7 +18,23 @@
         <span asp-validation-for="Answer" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Image" class="control-label"></label>
-        <input asp-for="Image" class="form-control" type="file" />
-        <span asp-validation-for="Image" class="text-danger"></span>
-    </div
+        <label asp-for="DeckId" class="control-label"></label>
+        <select asp-for="DeckId" class="form-control" asp-items="Model.Decks"></select>
+        <span asp-validation-for="DeckId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageFile" class="control-label"></label>
+        <input asp-for="ImageFile" class="form-control-file" type="file" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

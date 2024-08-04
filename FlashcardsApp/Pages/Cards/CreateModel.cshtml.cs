@@ -40,9 +40,6 @@ namespace FlashcardsApp.Pages.Cards
                     Card.Image = memoryStream.ToArray();
                 }
 
-               
-
-                
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", ImageUpload.FileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {

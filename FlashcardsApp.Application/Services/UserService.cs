@@ -1,7 +1,6 @@
 ﻿using FlashcardsApp.Application.Interfaces;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
+
 
 namespace FlashcardsApp.Application.Services
 {
